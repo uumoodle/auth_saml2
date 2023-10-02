@@ -676,7 +676,9 @@ class SP extends \SimpleSAML\Auth\Source
                 [
                     Constants::BINDING_HTTP_REDIRECT,
                     Constants::BINDING_HTTP_POST,
-                ],
+                    // auth_saml2 modification - Reordered to maintain existing  functionality.
+                    Constants::BINDING_HTTP_ARTIFACT,
+                ]
             );
         }
         $ar->setDestination($dst['Location']);
