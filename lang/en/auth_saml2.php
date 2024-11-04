@@ -178,6 +178,9 @@ $string['spmetadata_help'] = '<a href=\'{$a}\'>View Service Provider Metadata</a
 $string['spmetadatasign_help'] = 'Sign the SP Metadata.';
 $string['spmetadatasign'] = 'SP Metadata signature';
 $string['spmetadata'] = 'SP Metadata';
+$string['tempdirdefault'] = '/tmp/simplesaml';
+$string['tempdir_help'] = 'A directory where SimpleSAMLphp can save temporary files';
+$string['tempdir'] = 'SimpleSAMLphp temporary directory';
 $string['sspversion'] = 'SimpleSAMLphp version';
 $string['stateorprovincename'] = 'State or Province';
 $string['status'] = 'Status';

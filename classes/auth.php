@@ -109,7 +109,8 @@ class auth extends \auth_plugin_base {
         'nameidasattrib'     => 0,
         'flagresponsetype'   => saml2_settings::OPTION_FLAGGED_LOGIN_MESSAGE,
         'flagredirecturl'    => '',
-        'flagmessage'        => '' // Set in constructor.
+        'flagmessage'        => '', // Set in constructor.
+        'tempdir'            => '/tmp/simplesaml'
     ];
 
     /**
