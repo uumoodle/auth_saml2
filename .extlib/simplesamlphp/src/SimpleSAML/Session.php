@@ -10,6 +10,8 @@ use SimpleSAML\Assert\Assert;
 use SimpleSAML\Error;
 use SimpleSAML\Utils;
 
+use function hash_equals;
+
 /**
  * The Session class holds information about a user session, and everything attached to it.
  *
@@ -151,14 +153,6 @@ class Session implements Utils\ClearableState
     private function __construct(bool $transient = false)
     {
         $this->setConfiguration(Configuration::getInstance());
-
-         // Moodle custom: Try saving session BEFORE $DB gets destroyed. The __destructor() call to save will be clean.
-        \core_shutdown_manager::register_function(
-            function($session) {
-                $session->save();
-            },
-            [$this]
-        );
 
         if (php_sapi_name() === 'cli' || defined('STDIN')) {
             $this->trackid = 'CL' . bin2hex(openssl_random_pseudo_bytes(4));
@@ -313,7 +307,7 @@ class Session implements Utils\ClearableState
                 throw new Error\CriticalConfigurationError(
                     $e->getMessage(),
                     null,
-                    $c->toArray()
+                    $c->toArray(),
                 );
             }
             Logger::error('Error creating session: ' . $e->getMessage());
@@ -362,14 +356,13 @@ class Session implements Utils\ClearableState
             if ($session->authToken !== null) {
                 $authTokenCookieName = $globalConfig->getOptionalString(
                     'session.authtoken.cookiename',
-                    'SimpleSAMLAuthToken'
+                    'SimpleSAMLAuthToken',
                 );
                 if (!isset($_COOKIE[$authTokenCookieName])) {
                     Logger::warning('Missing AuthToken cookie.');
                     return null;
                 }
-                $cryptoUtils = new Utils\Crypto();
-                if (!$cryptoUtils->secureCompare($session->authToken, $_COOKIE[$authTokenCookieName])) {
+                if (!hash_equals($session->authToken, $_COOKIE[$authTokenCookieName])) {
                     Logger::warning('Invalid AuthToken cookie.');
                     return null;
                 }
@@ -507,10 +500,6 @@ class Session implements Utils\ClearableState
 
         $this->dirty = true;
 
-        // Moodle auth_saml2 hack, because we register a shutdown handler in
-        // moodle in the constructor we don't need to register a callback here.
-        return;
-
         if ($this->callback_registered) {
             // we already have a shutdown callback registered for this object, no need to add another one
             return;
@@ -527,9 +516,7 @@ class Session implements Utils\ClearableState
      */
     public function __destruct()
     {
-        // Moodle auth_saml2 hack, we don't need to save here because we have
-        // a custom shutdown handle registered with moodle.
-        // $this->save();
+        $this->save();
     }
 
 
@@ -673,7 +660,7 @@ class Session implements Utils\ClearableState
                 $httpUtils->setCookie(
                     self::$config->getOptionalString('session.authtoken.cookiename', 'SimpleSAMLAuthToken'),
                     $this->authToken,
-                    $sessionHandler->getCookieParams()
+                    $sessionHandler->getCookieParams(),
                 );
             } catch (Error\CannotSetCookie $e) {
                 /*
@@ -740,7 +727,7 @@ class Session implements Utils\ClearableState
 
                 throw new \Exception(
                     'Logout handler is not a valid function: ' . $classname . '::' .
-                    $functionname
+                    $functionname,
                 );
             }
 
@@ -766,7 +753,7 @@ class Session implements Utils\ClearableState
         if (!isset($this->authData[$authority])) {
             Logger::debug(
                 'Session: ' . var_export($authority, true) .
-                ' not valid because we are not authenticated.'
+                ' not valid because we are not authenticated.',
             );
             return false;
         }
@@ -801,7 +788,7 @@ class Session implements Utils\ClearableState
             $httpUtils->setCookie(
                 self::$config->getOptionalString('session.authtoken.cookiename', 'SimpleSAMLAuthToken'),
                 $this->authToken,
-                $params
+                $params,
             );
         }
     }
@@ -843,7 +830,7 @@ class Session implements Utils\ClearableState
         if (!is_callable($logout_handler)) {
             throw new \Exception(
                 'Logout handler is not a valid function: ' . $classname . '::' .
-                $functionname
+                $functionname,
             );
         }
 
@@ -887,9 +874,11 @@ class Session implements Utils\ClearableState
      * @throws \Exception If the data couldn't be stored.
      *
      */
-    public function setData(string $type, string $id, $data, $timeout = null): void
+    public function setData(string $type, string $id, mixed $data, int|string|null $timeout = null): void
     {
-        Assert::true(is_int($timeout) || $timeout === null || $timeout === self::DATA_TIMEOUT_SESSION_END);
+        if (is_string($timeout)) {
+            Assert::same($timeout, self::DATA_TIMEOUT_SESSION_END);
+        }
 
         if ($timeout === null) {
             // use the default timeout
@@ -898,7 +887,7 @@ class Session implements Utils\ClearableState
                 if ($timeout <= 0) {
                     throw new \Exception(
                         'The value of the session.datastore.timeout' .
-                        ' configuration option should be a positive integer.'
+                        ' configuration option should be a positive integer.',
                     );
                 }
             }
@@ -913,7 +902,7 @@ class Session implements Utils\ClearableState
         $dataInfo = [
             'expires' => $expires,
             'timeout' => $timeout,
-            'data'    => $data
+            'data'    => $data,
         ];
 
         if (!array_key_exists($type, $this->dataStore)) {
@@ -961,7 +950,7 @@ class Session implements Utils\ClearableState
      *
      * @return mixed The data of the given type with the given id or null if the data doesn't exist in the data store.
      */
-    public function getData(string $type, ?string $id)
+    public function getData(string $type, ?string $id): mixed
     {
         if ($id === null) {
             return null;
@@ -1131,7 +1120,7 @@ class Session implements Utils\ClearableState
      *
      * @return mixed  The value, or null if the value wasn't found.
      */
-    public function getAuthData(string $authority, string $name)
+    public function getAuthData(string $authority, string $name): mixed
     {
         if (!isset($this->authData[$authority][$name])) {
             return null;
