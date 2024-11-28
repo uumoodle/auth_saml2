@@ -31,7 +31,7 @@ use auth_saml2\metadata_fetcher;
  * @copyright  Copyright (c) 2017 Blackboard Inc. (http://www.blackboard.com)
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class auth_saml2_metadata_fetcher_testcase extends advanced_testcase {
+final class metadata_fetcher_test extends advanced_testcase {
 
     /** @var \Prophecy\Prophet */
     protected $prophet;
@@ -52,7 +52,7 @@ class auth_saml2_metadata_fetcher_testcase extends advanced_testcase {
         $this->prophet = null; // Required for Totara 12+ support (see issue #578).
     }
 
-    public function test_fetch_metadata_404() {
+    public function test_fetch_metadata_404(): void {
         $url = $this->getExternalTestFileUrl('/test404.xml');
         $fetcher = new metadata_fetcher();
 
@@ -65,7 +65,7 @@ class auth_saml2_metadata_fetcher_testcase extends advanced_testcase {
         }
     }
 
-    public function test_fetch_metadata_success() {
+    public function test_fetch_metadata_success(): void {
         $url = $this->getExternalTestFileUrl('/test.html');
         $fetcher = new metadata_fetcher();
 
@@ -75,7 +75,7 @@ class auth_saml2_metadata_fetcher_testcase extends advanced_testcase {
         $this->assertEquals(200, (int) $fetcher->get_curlinfo()['http_code']);
     }
 
-    public function test_fetch_metadata_curlerrorno() {
+    public function test_fetch_metadata_curlerrorno(): void {
         if (!isset($this->prophet)) {
             $this->markTestSkipped('Skipping due to Prophecy library not available');
         }
@@ -104,7 +104,7 @@ class auth_saml2_metadata_fetcher_testcase extends advanced_testcase {
         }
     }
 
-    public function test_fetch_metadata_nohttpstatus() {
+    public function test_fetch_metadata_nohttpstatus(): void {
         if (!isset($this->prophet)) {
             $this->markTestSkipped('Skipping due to Prophecy library not available');
         }
@@ -131,7 +131,7 @@ class auth_saml2_metadata_fetcher_testcase extends advanced_testcase {
         }
     }
 
-    public function test_fetch_metadata_override_ssl_options() {
+    public function test_fetch_metadata_override_ssl_options(): void {
         global $CFG;
 
         if (!isset($this->prophet)) {

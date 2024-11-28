@@ -26,7 +26,7 @@
  * @copyright   2021 Moodle Pty Ltd <support@moodle.com>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class generator_testcase extends \advanced_testcase {
+final class generator_test extends \advanced_testcase {
     /**
      * Set up
      */
@@ -60,11 +60,11 @@ class generator_testcase extends \advanced_testcase {
         $entity1 = $this->get_generator()->create_idp_entity();
         $auth = get_auth_plugin('saml2');
 
-        $files = array(
+        $files = [
             'crt' => $auth->certcrt,
             'pem' => $auth->certpem,
             'xml' => $auth->get_file(md5($entity1->metadataurl) . '.idp.xml'),
-        );
+        ];
         foreach ($files as $file) {
             $this->assertFileExists($file);
         }
@@ -121,11 +121,11 @@ class generator_testcase extends \advanced_testcase {
         $entity1 = $this->get_generator()->create_idp_entity([], false);
         $auth = get_auth_plugin('saml2');
 
-        $files = array(
+        $files = [
             'crt' => $auth->certcrt,
             'pem' => $auth->certpem,
             'xml' => $auth->get_file(md5($entity1->metadataurl) . '.idp.xml'),
-        );
+        ];
         foreach ($files as $file) {
             // Backwards compatibility with older PHPUnit - use old assertFile method.
             if (method_exists($this, 'assertFileDoesNotExist')) {

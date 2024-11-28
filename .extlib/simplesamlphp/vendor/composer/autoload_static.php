@@ -53,8 +53,6 @@ class ComposerStaticInitd92254016c92c1549c1187a87107524d
             'Symfony\\Component\\String\\' => 25,
             'Symfony\\Component\\Routing\\' => 26,
             'Symfony\\Component\\PasswordHasher\\' => 33,
-            'Symfony\\Component\\OptionsResolver\\' => 34,
-            'Symfony\\Component\\Ldap\\' => 23,
             'Symfony\\Component\\Intl\\' => 23,
             'Symfony\\Component\\HttpKernel\\' => 29,
             'Symfony\\Component\\HttpFoundation\\' => 33,
@@ -68,22 +66,13 @@ class ComposerStaticInitd92254016c92c1549c1187a87107524d
             'Symfony\\Component\\Cache\\' => 24,
             'Symfony\\Bundle\\FrameworkBundle\\' => 31,
             'Symfony\\Bridge\\Twig\\' => 20,
-            'SimpleSAML\\modules\\discopower\\' => 30,
             'SimpleSAML\\XML\\' => 15,
             'SimpleSAML\\XMLSecurity\\' => 23,
-            'SimpleSAML\\Module\\statistics\\' => 29,
-            'SimpleSAML\\Module\\sqlauth\\' => 26,
             'SimpleSAML\\Module\\saml\\' => 23,
-            'SimpleSAML\\Module\\radius\\' => 25,
             'SimpleSAML\\Module\\multiauth\\' => 28,
-            'SimpleSAML\\Module\\metarefresh\\' => 30,
-            'SimpleSAML\\Module\\ldap\\' => 23,
             'SimpleSAML\\Module\\exampleauth\\' => 30,
             'SimpleSAML\\Module\\cron\\' => 23,
             'SimpleSAML\\Module\\core\\' => 23,
-            'SimpleSAML\\Module\\consent\\' => 26,
-            'SimpleSAML\\Module\\consentAdmin\\' => 31,
-            'SimpleSAML\\Module\\authorize\\' => 28,
             'SimpleSAML\\Module\\admin\\' => 24,
             'SimpleSAML\\Composer\\XMLProvider\\' => 32,
             'SimpleSAML\\Composer\\' => 20,
@@ -102,7 +91,6 @@ class ComposerStaticInitd92254016c92c1549c1187a87107524d
             'Psr\\EventDispatcher\\' => 20,
             'Psr\\Container\\' => 14,
             'Psr\\Cache\\' => 10,
-            'PHPMailer\\PHPMailer\\' => 20,
         ),
         'L' => 
         array (
@@ -112,10 +100,6 @@ class ComposerStaticInitd92254016c92c1549c1187a87107524d
         array (
             'Gettext\\Languages\\' => 18,
             'Gettext\\' => 8,
-        ),
-        'D' => 
-        array (
-            'Dapphp\\Radius\\' => 14,
         ),
     );
 
@@ -200,14 +184,6 @@ class ComposerStaticInitd92254016c92c1549c1187a87107524d
         array (
             0 => __DIR__ . '/..' . '/symfony/password-hasher',
         ),
-        'Symfony\\Component\\OptionsResolver\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/symfony/options-resolver',
-        ),
-        'Symfony\\Component\\Ldap\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/symfony/ldap',
-        ),
         'Symfony\\Component\\Intl\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/intl',
@@ -260,10 +236,6 @@ class ComposerStaticInitd92254016c92c1549c1187a87107524d
         array (
             0 => __DIR__ . '/..' . '/symfony/twig-bridge',
         ),
-        'SimpleSAML\\modules\\discopower\\' => 
-        array (
-            0 => __DIR__ . '/../..' . '/modules/discopower/src',
-        ),
         'SimpleSAML\\XML\\' => 
         array (
             0 => __DIR__ . '/..' . '/simplesamlphp/xml-common/src',
@@ -272,33 +244,13 @@ class ComposerStaticInitd92254016c92c1549c1187a87107524d
         array (
             0 => __DIR__ . '/..' . '/simplesamlphp/xml-security/src',
         ),
-        'SimpleSAML\\Module\\statistics\\' => 
-        array (
-            0 => __DIR__ . '/../..' . '/modules/statistics/src',
-        ),
-        'SimpleSAML\\Module\\sqlauth\\' => 
-        array (
-            0 => __DIR__ . '/../..' . '/modules/sqlauth/src',
-        ),
         'SimpleSAML\\Module\\saml\\' => 
         array (
             0 => __DIR__ . '/../..' . '/modules/saml/src',
         ),
-        'SimpleSAML\\Module\\radius\\' => 
-        array (
-            0 => __DIR__ . '/../..' . '/modules/radius/src',
-        ),
         'SimpleSAML\\Module\\multiauth\\' => 
         array (
             0 => __DIR__ . '/../..' . '/modules/multiauth/src',
-        ),
-        'SimpleSAML\\Module\\metarefresh\\' => 
-        array (
-            0 => __DIR__ . '/../..' . '/modules/metarefresh/src',
-        ),
-        'SimpleSAML\\Module\\ldap\\' => 
-        array (
-            0 => __DIR__ . '/../..' . '/modules/ldap/src',
         ),
         'SimpleSAML\\Module\\exampleauth\\' => 
         array (
@@ -311,18 +263,6 @@ class ComposerStaticInitd92254016c92c1549c1187a87107524d
         'SimpleSAML\\Module\\core\\' => 
         array (
             0 => __DIR__ . '/../..' . '/modules/core/src',
-        ),
-        'SimpleSAML\\Module\\consent\\' => 
-        array (
-            0 => __DIR__ . '/../..' . '/modules/consent/src',
-        ),
-        'SimpleSAML\\Module\\consentAdmin\\' => 
-        array (
-            0 => __DIR__ . '/../..' . '/modules/consentAdmin/src',
-        ),
-        'SimpleSAML\\Module\\authorize\\' => 
-        array (
-            0 => __DIR__ . '/../..' . '/modules/authorize/src',
         ),
         'SimpleSAML\\Module\\admin\\' => 
         array (
@@ -373,10 +313,6 @@ class ComposerStaticInitd92254016c92c1549c1187a87107524d
         array (
             0 => __DIR__ . '/..' . '/psr/cache/src',
         ),
-        'PHPMailer\\PHPMailer\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/phpmailer/phpmailer/src',
-        ),
         'League\\Uri\\' => 
         array (
             0 => __DIR__ . '/..' . '/league/uri-interfaces',
@@ -389,20 +325,6 @@ class ComposerStaticInitd92254016c92c1549c1187a87107524d
         array (
             0 => __DIR__ . '/..' . '/gettext/gettext/src',
             1 => __DIR__ . '/..' . '/gettext/translator/src',
-        ),
-        'Dapphp\\Radius\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/dapphp/radius/src',
-        ),
-    );
-
-    public static $prefixesPsr0 = array (
-        'C' => 
-        array (
-            'Crypt_CHAP_' => 
-            array (
-                0 => __DIR__ . '/..' . '/dapphp/radius/lib',
-            ),
         ),
     );
 
@@ -434,7 +356,6 @@ class ComposerStaticInitd92254016c92c1549c1187a87107524d
         return \Closure::bind(function () use ($loader) {
             $loader->prefixLengthsPsr4 = ComposerStaticInitd92254016c92c1549c1187a87107524d::$prefixLengthsPsr4;
             $loader->prefixDirsPsr4 = ComposerStaticInitd92254016c92c1549c1187a87107524d::$prefixDirsPsr4;
-            $loader->prefixesPsr0 = ComposerStaticInitd92254016c92c1549c1187a87107524d::$prefixesPsr0;
             $loader->classMap = ComposerStaticInitd92254016c92c1549c1187a87107524d::$classMap;
 
         }, null, ClassLoader::class);

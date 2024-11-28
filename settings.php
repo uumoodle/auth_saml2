@@ -35,10 +35,10 @@ global $CFG;
 if ($ADMIN->fulltree) {
     require_once($CFG->dirroot.'/auth/saml2/locallib.php');
 
-    $yesno = array(
+    $yesno = [
             new lang_string('no'),
             new lang_string('yes'),
-    );
+    ];
 
     // Introductory explanation.
     $settings->add(new admin_setting_heading('auth_saml2/pluginname', '',
@@ -196,7 +196,7 @@ if ($ADMIN->fulltree) {
         'auth_saml2/assertionsconsumerservices',
         get_string('assertionsconsumerservices', 'auth_saml2'),
         get_string('assertionsconsumerservices_help', 'auth_saml2'),
-        array(),
+        [],
         $assertionsconsumerservices
     );
     $acssetting->set_updatedcallback('auth_saml2_update_sp_metadata');
@@ -350,7 +350,7 @@ urn:mace:dir:attribute-def:mail *</pre>"]),
     // Multi IdP display type.
     $multiidpdisplayoptions = [
         saml2_settings::OPTION_MULTI_IDP_DISPLAY_DROPDOWN => get_string('multiidpdropdown', 'auth_saml2'),
-        saml2_settings::OPTION_MULTI_IDP_DISPLAY_BUTTONS => get_string('multiidpbuttons', 'auth_saml2')
+        saml2_settings::OPTION_MULTI_IDP_DISPLAY_BUTTONS => get_string('multiidpbuttons', 'auth_saml2'),
     ];
     $settings->add(new admin_setting_configselect(
         'auth_saml2/multiidpdisplay',
@@ -398,7 +398,7 @@ urn:mace:dir:attribute-def:mail *</pre>"]),
     // Flagged login response options.
     $flaggedloginresponseoptions = [
         saml2_settings::OPTION_FLAGGED_LOGIN_MESSAGE => get_string('flaggedresponsetypemessage', 'auth_saml2'),
-        saml2_settings::OPTION_FLAGGED_LOGIN_REDIRECT => get_string('flaggedresponsetyperedirect', 'auth_saml2')
+        saml2_settings::OPTION_FLAGGED_LOGIN_REDIRECT => get_string('flaggedresponsetyperedirect', 'auth_saml2'),
     ];
 
     // Flagged login response options selector.

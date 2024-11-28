@@ -32,7 +32,7 @@ use auth_saml2\task\metadata_refresh;
  * @copyright  Copyright (c) 2017 Blackboard Inc. (http://www.blackboard.com)
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class auth_saml2_metadata_refresh_testcase extends advanced_testcase {
+final class metadata_refresh_test extends advanced_testcase {
 
     /** @var \Prophecy\Prophet */
     protected $prophet;
@@ -54,7 +54,7 @@ class auth_saml2_metadata_refresh_testcase extends advanced_testcase {
         $this->prophet = null;  // Required for Totara 12+ support (see issue #578).
     }
 
-    public function test_metadata_refresh_disabled() {
+    public function test_metadata_refresh_disabled(): void {
         set_config('idpmetadatarefresh', 0, 'auth_saml2');
         set_config('idpmetadata', 'http://somefakeidpurl.local', 'auth_saml2');
 
@@ -64,7 +64,7 @@ class auth_saml2_metadata_refresh_testcase extends advanced_testcase {
         self::assertFalse($refreshtask->execute());
     }
 
-    public function test_metadata_refresh_idpmetadata_non_url() {
+    public function test_metadata_refresh_idpmetadata_non_url(): void {
         $randomxml = <<<XML
 <?xml version="1.0" encoding="utf-8"?>
 <somexml>yada</somexml>
@@ -78,7 +78,7 @@ XML;
         $refreshtask->execute();
     }
 
-    public function test_metadata_refresh_idpmetadata_notconfigured() {
+    public function test_metadata_refresh_idpmetadata_notconfigured(): void {
         set_config('idpmetadatarefresh', 1, 'auth_saml2');
         set_config('idpmetadata', null, 'auth_saml2');
 
@@ -88,7 +88,7 @@ XML;
         self::assertFalse($refreshtask->execute());
     }
 
-    public function test_metadata_refresh_fetch_fails() {
+    public function test_metadata_refresh_fetch_fails(): void {
         $this->markTestSkipped('This test needs to be fixed or removed.');
 
         if (!isset($this->prophet)) {
@@ -106,7 +106,7 @@ XML;
         $refreshtask->execute();
     }
 
-    public function test_metadata_refresh_parse_fails() {
+    public function test_metadata_refresh_parse_fails(): void {
         $this->markTestSkipped('This test needs to be fixed or removed.');
 
         if (!isset($this->prophet)) {
@@ -127,7 +127,7 @@ XML;
         $refreshtask->execute();
     }
 
-    public function test_metadata_refresh_parse_no_entityid() {
+    public function test_metadata_refresh_parse_no_entityid(): void {
         $this->markTestSkipped('This test needs to be fixed or removed.');
 
         if (!isset($this->prophet)) {
@@ -150,7 +150,7 @@ XML;
         $refreshtask->execute();
     }
 
-    public function test_metadata_refresh_parse_no_idpname() {
+    public function test_metadata_refresh_parse_no_idpname(): void {
         $this->markTestSkipped('This test needs to be fixed or removed.');
 
         if (!isset($this->prophet)) {
@@ -176,7 +176,7 @@ XML;
         $this->assertEquals(get_string('idpnamedefault', 'auth_saml2'), $idpmduinames['http://somefakeidpurl.local']);
     }
 
-    public function test_metadata_refresh_write_fails() {
+    public function test_metadata_refresh_write_fails(): void {
         $this->markTestSkipped('This test needs to be fixed or removed.');
 
         if (!isset($this->prophet)) {

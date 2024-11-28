@@ -30,8 +30,8 @@ use auth_saml2\form\regenerate;
  * @package    auth_saml2
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class auth_saml2_form_regenerate_testcase extends advanced_testcase {
-    public function test_regenerate_certificate_form() {
+final class form_regenerate_test extends advanced_testcase {
+    public function test_regenerate_certificate_form(): void {
         global $CFG, $DB, $USER;
         $this->resetAfterTest();
 
