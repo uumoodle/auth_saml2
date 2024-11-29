@@ -47,10 +47,6 @@ final class metadata_refresh_test extends advanced_testcase {
         $this->resetAfterTest(true);
     }
 
-    public function setUpMetadatarefresh(): void {
-
-    }
-
     /**
      * Tear down after every test.
      */
