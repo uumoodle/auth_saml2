@@ -47,6 +47,10 @@ final class metadata_refresh_test extends advanced_testcase {
         $this->resetAfterTest(true);
     }
 
+    public function setUpMetadatarefresh(): void {
+
+    }
+
     /**
      * Tear down after every test.
      */
@@ -129,51 +133,10 @@ XML;
 
     public function test_metadata_refresh_parse_no_entityid(): void {
         $this->markTestSkipped('This test needs to be fixed or removed.');
-
-        if (!isset($this->prophet)) {
-            $this->markTestSkipped('Skipping due to Prophecy library not available');
-        }
-
-        set_config('idpmetadatarefresh', 1, 'auth_saml2');
-        set_config('idpmetadata', 'http://somefakeidpurl.local', 'auth_saml2');
-        $fetcher = $this->prophet->prophesize('auth_saml2\metadata_fetcher');
-        $parser = $this->prophet->prophesize('auth_saml2\metadata_parser');
-
-        $refreshtask = new metadata_refresh();
-        $refreshtask->set_fetcher($fetcher->reveal());
-        $refreshtask->set_parser($parser->reveal());
-
-        $fetcher->fetch('http://somefakeidpurl.local')->willReturn('doesnotmatter');
-        $parser->parse('doesnotmatter')->willReturn(null);
-        $parser->get_entityid()->willReturn('');
-        $this->expectOutputString(get_string('idpmetadata_noentityid', 'auth_saml2') . "\n");
-        $refreshtask->execute();
     }
 
     public function test_metadata_refresh_parse_no_idpname(): void {
         $this->markTestSkipped('This test needs to be fixed or removed.');
-
-        if (!isset($this->prophet)) {
-            $this->markTestSkipped('Skipping due to Prophecy library not available');
-        }
-
-        set_config('idpmetadatarefresh', 1, 'auth_saml2');
-        set_config('idpmetadata', 'http://somefakeidpurl.local', 'auth_saml2');
-        $fetcher = $this->prophet->prophesize('auth_saml2\metadata_fetcher');
-        $parser = $this->prophet->prophesize('auth_saml2\metadata_parser');
-
-        $refreshtask = new metadata_refresh();
-        $refreshtask->set_fetcher($fetcher->reveal());
-        $refreshtask->set_parser($parser->reveal());
-
-        $fetcher->fetch('http://somefakeidpurl.local')->willReturn('doesnotmatter');
-        $parser->parse('doesnotmatter')->willReturn(null);
-        $parser->get_entityid()->willReturn('someentityid');
-        $parser->get_idpdefaultname()->willReturn('');
-        $refreshtask->execute();
-
-        $idpmduinames = (array) json_decode(get_config('auth_saml2', 'idpmduinames'));
-        $this->assertEquals(get_string('idpnamedefault', 'auth_saml2'), $idpmduinames['http://somefakeidpurl.local']);
     }
 
     public function test_metadata_refresh_write_fails(): void {
