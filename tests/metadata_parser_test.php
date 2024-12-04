@@ -31,9 +31,9 @@ use auth_saml2\metadata_parser;
  * @copyright  Copyright (c) 2017 Blackboard Inc. (http://www.blackboard.com)
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class auth_saml2_metadata_parser_testcase extends basic_testcase {
+final class metadata_parser_test extends basic_testcase {
 
-    public function test_parse_metadata() {
+    public function test_parse_metadata(): void {
         $xml = file_get_contents(__DIR__ . '/fixtures/metadata.xml');
 
         $parser = new metadata_parser();
@@ -43,7 +43,7 @@ class auth_saml2_metadata_parser_testcase extends basic_testcase {
         $this->assertEquals('Example.com test IDP', $parser->get_idpdefaultname());
     }
 
-    public function test_parse_metadata_fail() {
+    public function test_parse_metadata_fail(): void {
         $malformedxml = <<<XML
 <EntitiesDescriptor Name="https://your-federation.org/metadata/federation-name.xml"
                     xmlns="urn:oasis:names:tc:SAML:2.0:metadata"

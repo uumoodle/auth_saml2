@@ -34,20 +34,20 @@ require_once(__DIR__ . '/../locallib.php');
  * @copyright  Brendan Heywood <brendan@catalyst-au.net>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class auth_saml2_locallib_testcase extends advanced_testcase {
+final class locallib_test extends advanced_testcase {
     /**
      * Regression test for Issue 132.
      */
-    public function test_it_can_initialise_more_than_once() {
+    public function test_it_can_initialise_more_than_once(): void {
         global $CFG, $DB;
         $this->resetAfterTest(true);
 
         // Add a fake IdP.
-        $DB->insert_record('auth_saml2_idps', array(
+        $DB->insert_record('auth_saml2_idps', [
             'metadataurl' => 'http://www.example.com',
             'entityid'    => 'http://www.example.com',
             'name'        => 'Test IdP',
-            'activeidp'   => 1));
+            'activeidp'   => 1]);
 
         for ($i = 0; $i < 3; $i++) {
             require($CFG->dirroot . '/auth/saml2/setup.php');
@@ -57,7 +57,7 @@ class auth_saml2_locallib_testcase extends advanced_testcase {
         }
     }
 
-    public function test_auth_saml2_sp_metadata() {
+    public function test_auth_saml2_sp_metadata(): void {
         global $CFG;
 
         $this->resetAfterTest();
@@ -85,7 +85,7 @@ class auth_saml2_locallib_testcase extends advanced_testcase {
     /**
      * If locked do not generate the cert, if unlocked then generate the cert.
      */
-    public function test_setup_no_cert_generate_if_locked() {
+    public function test_setup_no_cert_generate_if_locked(): void {
         $this->resetAfterTest();
         $auth = get_auth_plugin('saml2');
         set_config('certs_locked', 1, 'auth_saml2');
@@ -115,7 +115,7 @@ class auth_saml2_locallib_testcase extends advanced_testcase {
     /**
      * If locked and we try to generate certs, throw an exception and do not generate the certs.
      */
-    public function test_create_certificates_if_locked() {
+    public function test_create_certificates_if_locked(): void {
         $this->resetAfterTest();
         $auth = get_auth_plugin('saml2');
         set_config('certs_locked', 1, 'auth_saml2');

@@ -30,12 +30,12 @@
  * @copyright  Catalyst IT
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class auth_saml2_group_rule_test_testcase extends advanced_testcase {
+final class group_rule_test extends advanced_testcase {
 
     /**
      * Test we can get list of rules from config string.
      */
-    public function test_get_list() {
+    public function test_get_list(): void {
         $config = "allow group1=allowed\r\ngroup=blocked\r\ndeny group2=blocked\ndeny groups|blocked\ndeny groups= \ndeny  =test";
 
         $rules = \auth_saml2\group_rule::get_list($config);

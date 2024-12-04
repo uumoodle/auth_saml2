@@ -31,9 +31,9 @@ use auth_saml2\metadata_writer;
  * @copyright  Copyright (c) 2017 Blackboard Inc. (http://www.blackboard.com)
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class auth_saml2_metadata_writer_testcase extends basic_testcase {
+final class metadata_writer_test extends basic_testcase {
 
-    public function test_write_default_path() {
+    public function test_write_default_path(): void {
         global $CFG;
 
         $filename = 'idp.xml';
@@ -45,7 +45,7 @@ class auth_saml2_metadata_writer_testcase extends basic_testcase {
         $this->assertEquals($content, file_get_contents("$CFG->dataroot/saml2/idp.xml"));
     }
 
-    public function test_write_empty_filename() {
+    public function test_write_empty_filename(): void {
         $filename = '';
         $content = 'Test data';
 
@@ -54,7 +54,7 @@ class auth_saml2_metadata_writer_testcase extends basic_testcase {
         $writer->write($filename, $content);
     }
 
-    public function test_write_non_dataroot_path() {
+    public function test_write_non_dataroot_path(): void {
         global $CFG;
 
         $filename = 'idp.xml';
@@ -74,7 +74,7 @@ class auth_saml2_metadata_writer_testcase extends basic_testcase {
         $this->assertEquals($content, file_get_contents("$CFG->dataroot/saml2/idp.xml"));
     }
 
-    public function test_write_trailing_slash() {
+    public function test_write_trailing_slash(): void {
         global $CFG;
 
         $filename = 'idp.xml';

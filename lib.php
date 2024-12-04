@@ -75,7 +75,7 @@ function auth_saml2_before_http_headers() {
  *
  * @return array of check objects
  */
-function auth_saml2_status_checks() : array {
+function auth_saml2_status_checks(): array {
     global $saml2auth;
     require_once(__DIR__ . '/setup.php');
 
