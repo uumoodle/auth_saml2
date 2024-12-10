@@ -205,7 +205,6 @@ $string['suspendeduser'] = 'You have logged in successfully as \'{$a}\' but your
 $string['taskmetadatarefresh'] = 'Metadata refresh task';
 $string['tempdir'] = 'SimpleSAMLphp temporary directory';
 $string['tempdir_help'] = 'A directory where SimpleSAMLphp can save temporary files';
-$string['tempdirdefault'] = '/tmp/simplesaml';
 $string['test_auth_button_login'] = 'IdP Login';
 $string['test_auth_button_logout'] = 'IdP Logout';
 $string['test_auth_str'] = 'Test isAuthenticated and login';
