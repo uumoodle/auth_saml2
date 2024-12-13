@@ -315,10 +315,10 @@ class SP extends \SimpleSAML\Auth\Source
      */
     public function getIdPMetadata(string $entityId): Configuration
     {
-        // auth_saml2 modification.
-        // Set the IdP to null, so it can auto-detect.
-        // Avoid the case where it uses the default IdP data for IdP initiated login.
-        $this->idp = null;
+        if ($this->idp !== null && $this->idp !== $entityId) {
+            throw new Error\Exception('Cannot retrieve metadata for IdP ' .
+                var_export($entityId, true) . ' because it isn\'t a valid IdP for this SP.');
+        }
 
         $metadataHandler = MetaDataStorageHandler::getMetadataHandler();
 
@@ -469,10 +469,7 @@ class SP extends \SimpleSAML\Auth\Source
 
         $ar = Module\saml\Message::buildAuthnRequest($this->metadata, $idpMetadata);
 
-         // auth_saml2 modification
-        $baseurl = \SimpleSAML\Module::getModuleURL('saml/sp/saml2-acs.php/' . $this->authId);
-        $baseurl = str_replace('module.php/saml/sp/', '', $baseurl);
-        $ar->setAssertionConsumerServiceURL($baseurl);
+        $ar->setAssertionConsumerServiceURL(Module::getModuleURL('saml/sp/saml2-acs.php/' . $this->authId));
 
         if (isset($state['\SimpleSAML\Auth\Source.ReturnURL'])) {
             $ar->setRelayState($state['\SimpleSAML\Auth\Source.ReturnURL']);
@@ -583,8 +580,8 @@ class SP extends \SimpleSAML\Auth\Source
 
         /* Only check for real info for Scoping element if we are going to send Scoping element */
         if ($this->disable_scoping !== true && $idpMetadata->getOptionalBoolean('disable_scoping', false) !== true) {
-            if (isset($state['IDPList'])) {
-                $ar->setIDPList($state['IDPList']);
+            if (isset($state['saml:IDPList'])) {
+                $ar->setIDPList($state['saml:IDPList']);
             } elseif (!empty($this->metadata->getOptionalArray('IDPList', []))) {
                 $ar->setIDPList($this->metadata->getArray('IDPList'));
             } elseif (!empty($idpMetadata->getOptionalArray('IDPList', []))) {
@@ -661,20 +658,12 @@ class SP extends \SimpleSAML\Auth\Source
                 [
                     Constants::BINDING_HTTP_REDIRECT,
                     Constants::BINDING_HTTP_POST,
-                    // auth_saml2 modification - Reordered to maintain existing  functionality.
-                    Constants::BINDING_HTTP_ARTIFACT,
                 ],
             );
         }
         $ar->setDestination($dst['Location']);
 
         $b = Binding::getBinding($dst['Binding']);
-
-        // This is a Moodle hack. Both moodle and SSPHP rely on automatic
-        // destructors to cleanup the $DB var and the SSPHP session but
-        // this order is not guaranteed, so we force session saving here.
-        $session = \SimpleSAML\Session::getSessionFromRequest();
-        $session->save();
 
         $this->sendSAML2AuthnRequest($b, $ar);
 
@@ -1215,21 +1204,8 @@ class SP extends \SimpleSAML\Auth\Source
      */
     public static function handleUnsolicitedAuth(string $authId, array $state, string $redirectTo): void
     {
-        global $SESSION, $saml2auth;
-
         $session = Session::getSessionFromRequest();
         $session->doLogin($authId, Auth\State::getPersistentAuthData($state));
-
-        // Moodle hack to handle IdP unsolicited logins.
-        $wantsurl = (new \moodle_url($redirectTo))->out(false);
-        $SESSION->wantsurl = $wantsurl;
-        if (!empty($state['saml:sp:IdP'])) {
-            $SESSION->saml2idp = md5($state['saml:sp:IdP']);
-        } else {
-            unset($SESSION->saml2idp);
-        }
-        $saml2auth->saml_login_complete($state['Attributes']);
-        // Should never get to here.
 
         $httpUtils = new Utils\HTTP();
         $httpUtils->redirectUntrustedURL($redirectTo);
