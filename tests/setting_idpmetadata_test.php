@@ -14,8 +14,9 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
+namespace auth_saml2;
+
 use auth_saml2\admin\setting_idpmetadata;
-use auth_saml2\idp_data;
 
 defined('MOODLE_INTERNAL') || die();
 
@@ -29,7 +30,7 @@ require_once(__DIR__ . '/../_autoload.php');
  * @copyright   2018 Catalyst IT Australia {@link http://www.catalyst-au.net}
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-final class setting_idpmetadata_test extends advanced_testcase {
+final class setting_idpmetadata_test extends \advanced_testcase {
     /** @var setting_idpmetadata */
     private static $config;
 
