@@ -14,6 +14,8 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
+namespace auth_saml2;
+
 /**
  * auth_saml2 SimpleSAMLphp upgrade unit tests
  *
@@ -21,14 +23,7 @@
  * @copyright  Catalyst IT Australia {@link http://www.catalyst-au.net}
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-
-/**
- * auth_saml2 SimpleSAMLphp upgrade unit tests
- *
- * @package    auth_saml2
- * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- */
-final class simplesamlphp_upgrade_test extends advanced_testcase {
+final class simplesamlphp_upgrade_test extends \advanced_testcase {
 
     /**
      * Test to ensure that composer files are removed from compiled extlib/simplesamlphp.

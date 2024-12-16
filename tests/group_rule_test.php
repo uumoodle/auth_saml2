@@ -14,6 +14,8 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
+namespace auth_saml2;
+
 /**
  * Testcase class for group_rule class.
  *
@@ -22,15 +24,7 @@
  * @copyright  Catalyst IT
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-
-/**
- * Testcase class for group_rule class.
- *
- * @package    auth_saml2
- * @copyright  Catalyst IT
- * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- */
-final class group_rule_test extends advanced_testcase {
+final class group_rule_test extends \advanced_testcase {
 
     /**
      * Test we can get list of rules from config string.

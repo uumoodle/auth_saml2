@@ -14,6 +14,8 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
+namespace auth_saml2;
+
 /**
  * Testcase class for auth/saml2 Redis store.
  *
@@ -22,16 +24,7 @@
  * @copyright  Copyright (c) 2017 Blackboard Inc. (http://www.blackboard.com)
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-use auth_saml2\redis_store;
-
-/**
- * Testcase class for auth/saml2 Redis store.
- *
- * @package    auth_saml2
- * @copyright  Copyright (c) 2017 Blackboard Inc. (http://www.blackboard.com)
- * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- */
-final class redis_store_test extends advanced_testcase {
+final class redis_store_test extends \advanced_testcase {
 
     /**
      * @var null|\Redis

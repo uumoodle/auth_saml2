@@ -14,16 +14,7 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
-/**
- * Test for user fields class.
- *
- * @package    auth_saml2
- * @author     Dmitrii Metelkin <dmitriim@catalyst-au.net>
- * @copyright  2021 Catalyst IT
- * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- */
-
-use auth_saml2\user_fields;
+namespace auth_saml2;
 
 /**
  * Test for user fields class.
@@ -33,7 +24,7 @@ use auth_saml2\user_fields;
  * @copyright  2021 Catalyst IT
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-final class user_fields_test extends advanced_testcase {
+final class user_fields_test extends \advanced_testcase {
 
     /**
      * A helper function to create a custom profile field.
@@ -44,7 +35,7 @@ final class user_fields_test extends advanced_testcase {
      *
      * @return \stdClass
      */
-    protected function add_user_profile_field(string $shortname, string $datatype, bool $unique = false): stdClass {
+    protected function add_user_profile_field(string $shortname, string $datatype, bool $unique = false): \stdClass {
         global $DB;
 
         // Create a new profile field.
