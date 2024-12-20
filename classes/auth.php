@@ -653,6 +653,30 @@ class auth extends \auth_plugin_base {
 
         // Complete login process.
         $attributes = $auth->getAttributes();
+
+        // Start UU hack.
+        // This hack is necessary because the email field obtained fromn IAM contains multiple emails for some users.
+        // These emails are comma separated in a single string. This causes problems for moodle.
+
+
+        // Start debug code.
+        // When this line is uncommented, privacy data from logins will be stored in the httpd/error_log
+        // ip address, email, name, etc
+        // Do not do this in production !!
+
+        // error_log('saml_login' . '  ' . $this->config->field_map_email. '  ' . json_encode($attributes[$this->config->field_map_email]));
+
+        // End debug code.
+
+        // Extract the email containing @uu.nl
+        // If there are no such emails, use the first one.
+
+        $email = $this->get_email_from_attributes($attributes);
+        if($email) {
+                $attributes[$this->config->field_map_email] = [$email];
+        }
+        // End UU hack.
+
         $this->saml_login_complete($attributes);
     }
 
@@ -1088,6 +1112,33 @@ class auth extends \auth_plugin_base {
      */
     public function get_email_from_attributes(array $attributes) {
         if (!empty($this->config->field_map_email) && !empty($attributes[$this->config->field_map_email])) {
+    
+            // UU hack to pick the primary email (email containing "@uu.nl" if it exists.
+            $emails = $attributes[$this->config->field_map_email];
+            if (count($emails) > 1){
+                foreach ($emails as $email) {
+                    if (str_ends_with($email, '@students.uu.nl')) {
+                        return $email;
+                    }
+                }
+                foreach ($emails as $email) {
+                    if (str_ends_with($email, '@uu.nl')) {
+                        return $email;
+                    }
+                }
+                foreach ($emails as $email) {
+                    if (str_ends_with($email, '@acc.students.uu.nl')) {
+                        return $email;
+                    }
+                }
+                foreach ($emails as $email) {
+                    if (str_ends_with($email, '@acc.uu.nl')) {
+                        return $email;
+                    }
+                }
+            }
+            // End UU hack.
+    
             return $attributes[$this->config->field_map_email][0];
         }
 
