@@ -14,6 +14,10 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
+namespace auth_saml2;
+
+use auth_saml2\task\metadata_refresh;
+
 /**
  * Testcase class for metadata_refresh task class.
  *
@@ -22,17 +26,7 @@
  * @copyright  Copyright (c) 2017 Blackboard Inc. (http://www.blackboard.com)
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-
-use auth_saml2\task\metadata_refresh;
-
-/**
- * Testcase class for metadata_refresh task class.
- *
- * @package    auth_saml2
- * @copyright  Copyright (c) 2017 Blackboard Inc. (http://www.blackboard.com)
- * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- */
-final class metadata_refresh_test extends advanced_testcase {
+final class metadata_refresh_test extends \advanced_testcase {
 
     /** @var \Prophecy\Prophet */
     protected $prophet;

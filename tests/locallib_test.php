@@ -14,16 +14,9 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
-/**
- * SAML2 SP metadata tests.
- *
- * @package    auth_saml2
- * @copyright  Brendan Heywood <brendan@catalyst-au.net>
- * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- */
+namespace auth_saml2;
 
-use auth_saml2\admin\saml2_settings;
-use auth_saml2\admin\setting_idpmetadata;
+use SimpleXMLElement;
 
 defined('MOODLE_INTERNAL') || die();
 require_once(__DIR__ . '/../locallib.php');
@@ -31,10 +24,11 @@ require_once(__DIR__ . '/../locallib.php');
 /**
  * Tests for SAML
  *
+ * @package    auth_saml2
  * @copyright  Brendan Heywood <brendan@catalyst-au.net>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-final class locallib_test extends advanced_testcase {
+final class locallib_test extends \advanced_testcase {
     /**
      * Regression test for Issue 132.
      */

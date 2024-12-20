@@ -14,6 +14,8 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
+namespace auth_saml2;
+
 /**
  * Testcase class for metadata_parser class.
  *
@@ -22,16 +24,7 @@
  * @copyright  Copyright (c) 2017 Blackboard Inc. (http://www.blackboard.com)
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-use auth_saml2\metadata_parser;
-
-/**
- * Testcase class for metadata_parser class.
- *
- * @package    auth_saml2
- * @copyright  Copyright (c) 2017 Blackboard Inc. (http://www.blackboard.com)
- * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- */
-final class metadata_parser_test extends basic_testcase {
+final class metadata_parser_test extends \basic_testcase {
 
     public function test_parse_metadata(): void {
         $xml = file_get_contents(__DIR__ . '/fixtures/metadata.xml');

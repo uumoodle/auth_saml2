@@ -14,23 +14,17 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
-/**
- * auth_saml2 create/edit page unit tests
- *
- * @package    auth_saml2
- * @copyright  Catalyst IT Australia {@link http://www.catalyst-au.net}
- * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- */
+namespace auth_saml2;
 
 use auth_saml2\form\regenerate;
 
 /**
  * auth_saml2 form submission unit tests
- *
  * @package    auth_saml2
+ * @copyright  Catalyst IT Australia {@link http://www.catalyst-au.net}
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-final class form_regenerate_test extends advanced_testcase {
+final class form_regenerate_test extends \advanced_testcase {
     public function test_regenerate_certificate_form(): void {
         global $CFG, $DB, $USER;
         $this->resetAfterTest();
