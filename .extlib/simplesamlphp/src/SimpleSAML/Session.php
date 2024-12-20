@@ -353,7 +353,7 @@ class Session implements Utils\ClearableState
             return self::$sessions[$sessionId];
         }
 
-        if (isset($session)) {
+        if (isset($sessionId)) {
             $session = $sh->loadSession($sessionId);
         }  else {
             $session = null;
