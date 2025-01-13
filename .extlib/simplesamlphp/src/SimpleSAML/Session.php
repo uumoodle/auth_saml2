@@ -355,7 +355,7 @@ class Session implements Utils\ClearableState
 
         try {
             $session = $sh->loadSession($sessionId);
-        }  catch() {
+        }  catch(Exception $e) {
             return null;
         }
         
