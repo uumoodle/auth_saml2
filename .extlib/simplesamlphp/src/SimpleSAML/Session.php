@@ -356,7 +356,7 @@ class Session implements Utils\ClearableState
         if (isset($sessionId)) {
             $session = $sh->loadSession($sessionId);
         }  else {
-            $session = null;
+            return null;
         }
         if ($session === null) {
             return null;
