@@ -249,9 +249,9 @@ abstract class NameIDType implements Serializable
     public function __unserialize($serialized): void
     {
         foreach ($serialized as $k => $v) {
-            // if (property_exists($this, $k)) {
+            if (property_exists($this, $k)) {
                 $this->$k = $v;
-            // }
+            }
         }
     }
 
