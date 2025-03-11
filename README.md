@@ -1,4 +1,10 @@
-[![ci](https://github.com/catalyst/moodle-auth_saml2/actions/workflows/ci.yml/badge.svg?branch=MOODLE_404_STABLE)](https://github.com/catalyst/moodle-auth_saml2/actions/workflows/ci.yml?branch=MOODLE_404_STABLE)
+# UU local changes
+This is a fork of the saml2 plugin by Catalyst.
+
+The only local change involves editing the email field. Some users have multiple email adresses in their solisID credentials. The emails are comma separated in a single attribute. This causes errors in moodle.
+A single priority email is chosen and returned.
+
+![GitHub Workflow Status (branch)](https://img.shields.io/github/actions/workflow/status/catalyst/moodle-auth_saml2/ci.yml?branch=MOODLE_39_STABLE&label=ci)
 
 https://moodle.org/plugins/auth_saml2
 
