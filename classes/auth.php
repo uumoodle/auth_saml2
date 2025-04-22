@@ -1320,7 +1320,7 @@ class auth extends \auth_plugin_base {
         // perform the full initialization. For better performance
         // we only make sure \SimpleSAML\Configuration is accessible
         // through _autoload.php.
-        require_once(__DIR__ . '/../_autoload.php');
+        require_once(__DIR__ . '/../vendor/autoload.php');
         $config = new \SimpleSAML\Configuration([], '');
         return $config->getVersion();
     }
